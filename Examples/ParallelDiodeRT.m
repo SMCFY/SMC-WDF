@@ -82,7 +82,7 @@ classdef ParallelDiodeRT < audioPlugin
                 a = WaveUp(obj.A2); 
                 solveNL(obj, a);
                 WaveDown(obj.A2, obj.b); % evaluate the wave leaving the diode (root element)
-                output(n) = Voltage(obj.A2);
+                output(n,:) = Voltage(obj.A2);
             end
             out = output*obj.mix + (1-obj.mix)*x;
         end
