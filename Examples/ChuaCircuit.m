@@ -8,10 +8,10 @@ output = zeros(len,1);
 
 % Capacitor C2
 C2val = 49.5e-9;
-C2 = Capacitor(1/(2*C2val*fs)); 
+C2 = Capacitor(C2val, fs); 
 % Inductor L1
 Lval = 7.07e-3;
-L1 = Inductor(2*Lval*fs);
+L1 = Inductor(Lval, fs);
 % Initialise L1 with a small voltage to excite the circuit
 L1.State = 0.1;
 % Connect inductor L1 and capacitor C2 in parallel
@@ -22,7 +22,7 @@ R1 = Resistor(1428); % 1.428kOhm
 S1 = Series(P1, R1);
 % Capacitor C1 
 C1val = 5.5e-9;
-C1 = Capacitor(1/(2*C1val*fs));
+C1 = Capacitor(C1val, fs);
 % Parallel connection between S1 and C1, Serves as the adaptor at the "top"
 % of the tree
 P2 = Parallel(S1, C1);

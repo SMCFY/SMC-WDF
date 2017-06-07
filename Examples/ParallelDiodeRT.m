@@ -42,11 +42,11 @@ classdef ParallelDiodeRT < audioPlugin
             
             Ch = 0.47e-6; % the capacitance value in Farads
             
-            obj.C1 = Capacitor(1/(2*Ch*Fs)); % create the capacitance
+            obj.C1 = Capacitor(Ch,Fs); % create the capacitance
             
             Cl = 0.01e-6;
             
-            obj.C2 = Capacitor(1/(2*Cl*Fs));
+            obj.C2 = Capacitor(Cl,Fs);
             
             obj.A1 = Series(obj.V1, obj.C1);
             obj.A2 = Parallel(obj.A1, obj.C2);

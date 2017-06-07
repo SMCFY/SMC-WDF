@@ -14,9 +14,9 @@ N = 20000; % number of samples to simulate
 output = zeros(N,1);
  
 CapVal1 = 1.6e-4; % the capacitance value in Farads
-C1 = Capacitor(1/(2*CapVal1*Fs));
+C1 = Capacitor(CapVal1, Fs);
 Lval1 = 3.6e-4;
-L1 = Inductor(Fs/2*Lval1);
+L1 = Inductor(Lval1, Fs);
 L1.State = 100;
  
 A1 =  Series(C1,L1); % create WDF 

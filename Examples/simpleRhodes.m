@@ -15,15 +15,15 @@ Fs = 44100;
 N = 40000; 
 
 % Resonator
-Lt = Inductor(Fs/2 * 0.0022)
-Ct = Capacitor(1/(2 * 15.947e-5 * Fs))
+Lt = Inductor(0.0022,Fs)
+Ct = Capacitor(15.947e-5, Fs)
 A1 = Series(Lt, Ct);
 
 Rt = Resistor(0.04)
 A2 = Series(A1, Rt)
 
 % Hammer
-Lm = Inductor(Fs/2 * 0.001)
+Lm = Inductor(0.001, Fs)
 Lm.State = -2;
 A3 = Parallel(Lm,A2);
 

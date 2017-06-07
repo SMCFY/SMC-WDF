@@ -18,11 +18,11 @@ V1 = TerminatedVs(0, 2200);
 
 % Capacitor C1 with Ch value
 Ch = 0.47e-6; % the capacitance value in Farads
-C1 = Capacitor(1/(2*Ch*Fs)); % create the capacitance
+C1 = Capacitor(Ch,Fs); % create the capacitance
 
 % Capacitor C2 with Cl value
 Cl = 0.01e-6;
-C2 = Capacitor(1/(2*Cl*Fs));
+C2 = Capacitor(Cl,Fs);
 
 % Connect V1 and C1 in series
 A1 = Series(V1,C1);

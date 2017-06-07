@@ -7,10 +7,10 @@ N = Fs; % number of samples to simulate
 output = zeros(N,1);
 
 CapVal = 3.6e-4; % the capacitance value in Farads
-C1 = Capacitor(1/(2*CapVal*Fs));
+C1 = Capacitor(CapVal, Fs);
 
 Lval = 3.6e-4;
-L1 = Inductor(Fs/2*Lval);
+L1 = Inductor(Lval, Fs);
 L1.State = 1;
 
 s1 =  Series(C1,L1); % create WDF tree as a ser. conn. of V1,C1, and R1
