@@ -12,7 +12,7 @@ classdef Parallel < Adaptor % the class for parallel 3-port adaptors
         function obj = Parallel(KidLeft,KidRight) % constructor function
             obj.KidLeft = KidLeft; % connect the left 'child'
             obj.KidRight = KidRight; % connect the right 'child'
-            % BCT
+
             R1 = KidLeft.PortRes;
             R2 = KidRight.PortRes; 
             
@@ -21,7 +21,6 @@ classdef Parallel < Adaptor % the class for parallel 3-port adaptors
             obj.gamma = R/KidLeft.PortRes;
         end
         function WU = WaveUp(obj) % the up-going wave at the adapted port
-            % Scattering method from BCT
             obj.a1 = WaveUp(obj.KidLeft);
             obj.a2 = WaveUp(obj.KidRight);
             obj.pb2 = obj.gamma * (obj.a1 - obj.a2); % 36a fettweis
@@ -35,9 +34,9 @@ classdef Parallel < Adaptor % the class for parallel 3-port adaptors
             b3 = obj.pb2 + obj.a2; % 36b fettweis
             a3 = WaveFromParent;
 
-            left = b3 - obj.a1 + a3; % 32b fettweis
-            right = obj.pb2 + a3; % 36b fettweis
-
+            left = b3 + (a3 - obj.a1); % 32b fettweis 
+            right = b3 + (a3 - obj.a2);% 32b fettweis
+            
             WaveDown(obj.KidLeft, left);
             WaveDown(obj.KidRight, right);
         end
