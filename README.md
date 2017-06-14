@@ -4,7 +4,6 @@ A Real-Time Wave Digital Filter Library for Matlab. The library provides the mos
 SMC-WDF is created by [Jonas Holfelt](https://github.com/jholfelt), [Sohejl Zabetian](https://github.com/szbtn), [Aleix Claramunt Molet](https://github.com/aleixcm) and [Nikolaj Andersson](https://github.com/NikolajAndersson) during their 2nd semester at [Sound and Music Computing](https://github.com/SMC-AAU-CPH) at [Aalborg University Copenhagen](http://media.aau.dk/smc/).
 
 # Inspirations
-The library is based on the WDF code from the DAFx book.
 [DAFx's WDF library](dafx.de)
 
 [WDF++](https://github.com/AndrewBelt/WDFplusplus)
