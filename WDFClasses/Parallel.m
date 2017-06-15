@@ -40,5 +40,21 @@ classdef Parallel < Adaptor % the class for parallel 3-port adaptors
             WaveDown(obj.KidLeft, left);
             WaveDown(obj.KidRight, right);
         end
+        function updateValue(obj)
+             % Update the adaptor port resistances
+            if or(isa(obj.KidLeft,'Parallel'),isa(obj.KidLeft,'Series'))
+                updateValue(obj.KidLeft);
+            end
+            if or(isa(obj.KidRight,'Parallel'),isa(obj.KidRight,'Series'))
+                updateValue(obj.KidRight);
+            end
+            % set the new port resistance
+            R1 = obj.KidLeft.PortRes;
+            R2 = obj.KidRight.PortRes; 
+            
+            R = (R1 * R2)/(R1 + R2);
+            obj.PortRes = R;
+            obj.gamma = R/obj.KidLeft.PortRes;
+        end
     end
 end

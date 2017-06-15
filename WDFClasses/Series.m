@@ -27,5 +27,16 @@ classdef Series < Adaptor % the class for series 3-port adaptors
             WaveDown(obj.KidLeft,left);
             WaveDown(obj.KidRight,right);
         end
+        function updateValue(obj)
+            % Update the adaptor port resistances
+            if or(isa(obj.KidLeft,'Parallel'),isa(obj.KidLeft,'Series'))
+                updateValue(obj.KidLeft);
+            end
+            if or(isa(obj.KidRight,'Parallel'),isa(obj.KidRight,'Series'))
+                updateValue(obj.KidRight);
+            end
+            % set the new port resistance
+            obj.PortRes = obj.KidLeft.PortRes+obj.KidRight.PortRes; % adapt. port 
+        end
     end
 end
