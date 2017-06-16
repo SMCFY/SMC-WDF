@@ -1,5 +1,5 @@
 %----------------------Two Port Parallel Adaptor with Switch Class------------------------
-classdef ParallelSwitch < Adaptor 
+classdef ParallelSwitch < Adaptor
     properties
         WD = 0;% this is the down-going wave at the adapted port
         WU = 0;% this is the up-going wave at the adapted port
@@ -16,7 +16,7 @@ classdef ParallelSwitch < Adaptor
             R1 = KidLeft.PortRes;
             R2 = KidRight.PortRes;
             
-            R = (R1 * R2)/(R1 + R2); 
+            R = (R1 * R2)/(R1 + R2);
             
             obj.PortRes = R; % not needed
             obj.gamma = (R1 - R2)/(R1 + R2); % fettweis 49
@@ -56,17 +56,11 @@ classdef ParallelSwitch < Adaptor
         end
         function updateValue(obj)
             % Update the adaptor port resistances
-%             if or(isa(obj.KidLeft,'Parallel'),isa(obj.KidLeft,'Series'))
-%                 updateValue(obj.KidLeft);
-%             end
-%             if or(isa(obj.KidRight,'Parallel'),isa(obj.KidRight,'Series'))
-%                 updateValue(obj.KidRight);
-%             end
             if isa(obj.KidLeft, 'Adaptor')
-                 updateValue(obj.KidLeft);
+                updateValue(obj.KidLeft);
             end
             if isa(obj.KidRight, 'Adaptor')
-                 updateValue(obj.KidRight);
+                updateValue(obj.KidRight);
             end
             % set the new port resistance
             R1 = obj.KidLeft.PortRes;

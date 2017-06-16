@@ -3,7 +3,7 @@ classdef Parallel < Adaptor % the class for parallel 3-port adaptors
     properties
         WD = 0;% this is the down-going wave at the adapted port
         WU = 0;% this is the up-going wave at the adapted port
-        pb2 = 0; 
+        pb2 = 0;
         a1 = 0;
         a2 = 0;
         gamma = 0;
@@ -12,9 +12,9 @@ classdef Parallel < Adaptor % the class for parallel 3-port adaptors
         function obj = Parallel(KidLeft,KidRight) % constructor function
             obj.KidLeft = KidLeft; % connect the left 'child'
             obj.KidRight = KidRight; % connect the right 'child'
-
+            
             R1 = KidLeft.PortRes;
-            R2 = KidRight.PortRes; 
+            R2 = KidRight.PortRes;
             
             R = (R1 * R2)/(R1 + R2);
             obj.PortRes = R;
@@ -29,28 +29,28 @@ classdef Parallel < Adaptor % the class for parallel 3-port adaptors
         end
         function WaveDown(obj,WaveFromParent) %  sets the down-going wave
             obj.WD = WaveFromParent; % set the down-going wave for the adaptor
-           
-            % Scattering according to fettweis theory and practice 
+            
+            % Scattering according to fettweis theory and practice
             b3 = obj.pb2 + obj.a2; % 36b fettweis
             a3 = WaveFromParent;
-
-            left = b3 + (a3 - obj.a1); % 32b fettweis 
+            
+            left = b3 + (a3 - obj.a1); % 32b fettweis
             right = b3 + (a3 - obj.a2);% 32b fettweis
             
             WaveDown(obj.KidLeft, left);
             WaveDown(obj.KidRight, right);
         end
         function updateValue(obj)
-             % Update the adaptor port resistances
-             if isa(obj.KidLeft, 'Adaptor')
-                 updateValue(obj.KidLeft);
+            % Update the adaptor port resistances
+            if isa(obj.KidLeft, 'Adaptor')
+                updateValue(obj.KidLeft);
             end
             if isa(obj.KidRight, 'Adaptor')
-                 updateValue(obj.KidRight);
+                updateValue(obj.KidRight);
             end
             % set the new port resistance
             R1 = obj.KidLeft.PortRes;
-            R2 = obj.KidRight.PortRes; 
+            R2 = obj.KidRight.PortRes;
             
             R = (R1 * R2)/(R1 + R2);
             obj.PortRes = R;

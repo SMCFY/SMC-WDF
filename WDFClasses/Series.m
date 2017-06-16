@@ -29,14 +29,14 @@ classdef Series < Adaptor % the class for series 3-port adaptors
         end
         function updateValue(obj)
             % Update the adaptor port resistances
-             if isa(obj.KidLeft, 'Adaptor')
-                 updateValue(obj.KidLeft);
+            if isa(obj.KidLeft, 'Adaptor')
+                updateValue(obj.KidLeft);
             end
             if isa(obj.KidRight, 'Adaptor')
-                 updateValue(obj.KidRight);
+                updateValue(obj.KidRight);
             end
             % set the new port resistance
-            obj.PortRes = obj.KidLeft.PortRes+obj.KidRight.PortRes; % adapt. port 
+            obj.PortRes = obj.KidLeft.PortRes+obj.KidRight.PortRes; % adapt. port
         end
     end
 end
