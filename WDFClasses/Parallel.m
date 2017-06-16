@@ -42,11 +42,11 @@ classdef Parallel < Adaptor % the class for parallel 3-port adaptors
         end
         function updateValue(obj)
              % Update the adaptor port resistances
-            if or(isa(obj.KidLeft,'Parallel'),isa(obj.KidLeft,'Series'))
-                updateValue(obj.KidLeft);
+             if isa(obj.KidLeft, 'Adaptor')
+                 updateValue(obj.KidLeft);
             end
-            if or(isa(obj.KidRight,'Parallel'),isa(obj.KidRight,'Series'))
-                updateValue(obj.KidRight);
+            if isa(obj.KidRight, 'Adaptor')
+                 updateValue(obj.KidRight);
             end
             % set the new port resistance
             R1 = obj.KidLeft.PortRes;
