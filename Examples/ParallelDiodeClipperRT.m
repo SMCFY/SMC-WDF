@@ -14,24 +14,20 @@ classdef ParallelDiodeClipperRT < audioPlugin
     end
     
     properties (Access = private)
-        pSR
-        
-        model
+        pSR     % sampling rate   
+        model   % circuit model
     end
     
     methods
         function obj = ParallelDiodeClipperRT()
             obj.pSR = getSampleRate(obj);
-            obj.model = ParallelDiodeClipperModel(obj.pSR);
-            
+            obj.model = ParallelDiodeClipperModel(obj.pSR);     
         end
-        
         
         function reset(obj)
             obj.pSR = getSampleRate(obj);    
         end
-       
-        
+    
         function out = process(obj, x)
             output = process(obj.model, x*obj.gain);
             out = output*obj.mix + (1-obj.mix)*x;

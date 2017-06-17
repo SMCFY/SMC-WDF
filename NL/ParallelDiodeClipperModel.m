@@ -1,10 +1,8 @@
 classdef ParallelDiodeClipperModel < handle
-    % Anti Parallel Diode Circuit
+    % Two Capacitor Diode Clipper Circuit
     % As described in SIMULATING GUITAR DISTORTION CIRCUITS USING WAVE DIGITAL
     % AND NONLINEAR STATE-SPACE FORMULATIONS by David Yeh and Julius Smith.
-    
-    properties
-    end
+
     properties (Access = private)
         V1 % create a source with 0 (initial) voltage and 1 Ohm ser. res.
         R1 % create an 80Ohm resistor
@@ -15,13 +13,11 @@ classdef ParallelDiodeClipperModel < handle
         
         b = 0; % outgoing wave
         
-        
         % Diode model parameters
         Is = 2.52e-9;
         Vt = 45.3e-3;
         
-        Rp
-        
+        Rp     
     end
     
     methods
@@ -56,7 +52,7 @@ classdef ParallelDiodeClipperModel < handle
             epsilon = 1e-9;
             
             iter = 1;
-            
+            % NR Algorithm
             while (abs(err) / abs(obj.b) > epsilon )
                 f = 2*obj.Is*sinh((a + obj.b)/(2*obj.Vt)) - (a - obj.b)/(2*obj.Rp);
                 df = 2*obj.Is*sinh((a + (obj.b+dx))/(2*obj.Vt)) - (a-(obj.b+dx))/(2*obj.Rp);
