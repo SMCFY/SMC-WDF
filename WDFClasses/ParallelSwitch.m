@@ -23,12 +23,16 @@ classdef ParallelSwitch < Adaptor
             
         end
         function WU = WaveUp(obj) % the up-going wave at the adapted port
-            obj.a1 = WaveUp(obj.KidLeft);
-            obj.a2 = WaveUp(obj.KidRight);
-            WU = obj.a1 + obj.gamma*(obj.a2 - obj.a1);
-            obj.WU = WU;
-            if obj.state == 1 % if the switch is on
+            if obj.state == 1 % if the switch is on  
+                obj.a1 = WaveUp(obj.KidLeft);
+                obj.a2 = WaveUp(obj.KidRight);
+                WU = obj.a1 + obj.gamma*(obj.a2 - obj.a1);
+                obj.WU = WU;
                 WaveDown(obj.KidRight, WU); % set state
+            else 
+                obj.a1 = WaveUp(obj.KidLeft);
+                WU = obj.a1; % Open circuit b[n] = a[n]
+                obj.WU = WU;
             end
         end
         function WD = WaveDown(obj) %  sets the down-going wave

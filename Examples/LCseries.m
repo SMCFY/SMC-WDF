@@ -19,7 +19,7 @@ r = 1/(2*pi*sqrt(CapVal*Lval)) % resonant frequency, from wiki: https://en.wikip
 for i=1:N
     WU = WaveUp(s1); % get the waves up to the root
     WaveDown(s1,-WU); % short circuit, b[n] = -a[n]
-    output(i) = getState(C1);
+    output(i) = Voltage(C1);
 
 end
 %% 
